@@ -4,8 +4,14 @@ import router from './router'
 import store from './store'
 import vuetify from './plugins/vuetify'
 import 'roboto-fontface/css/roboto/roboto-fontface.css'
-// import '@mdi/font/css/materialdesignicons.css'
 import 'noto-sans-kr/styles.css'
+
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+import { faUserGroup } from '@fortawesome/free-solid-svg-icons'
+
+library.add(faUserGroup)
+Vue.component('font-awesome-icon', FontAwesomeIcon)
 
 Vue.config.productionTip = false
 
