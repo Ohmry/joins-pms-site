@@ -1,55 +1,55 @@
 <template>
   <v-app>
-    <v-app-bar
-      app
-      color="primary"
-      dark
-    >
-      <div class="d-flex align-center">
-        <v-img
-          alt="Vuetify Logo"
-          class="shrink mr-2"
-          contain
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-logo-dark.png"
-          transition="scale-transition"
-          width="40"
-        />
-
-        <v-img
-          alt="Vuetify Name"
-          class="shrink mt-1 hidden-sm-and-down"
-          contain
-          min-width="100"
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-name-dark.png"
-          width="100"
-        />
-      </div>
-
-      <v-spacer></v-spacer>
-
-      <v-btn
-        href="https://github.com/vuetifyjs/vuetify/releases/latest"
-        target="_blank"
-        text
-      >
-        <span class="mr-2">Latest Release</span>
-        <v-icon>mdi-open-in-new</v-icon>
-      </v-btn>
+    <v-app-bar flat>
+      <!-- Logo -->
+      <router-link to="/">
+        <v-app-bar-title>
+          <v-icon>diversity_3</v-icon>
+          <span>프로젝트관리솔루션</span>
+        </v-app-bar-title>
+      </router-link>
+      <!-- Menu -->
+      <v-toolbar flat class="v-app-bar-buttons">
+        <v-toolbar-items>
+          <v-btn
+            v-for="(menu, index) in application.menus"
+            :key="'v-app-bar-button_' + index"
+            depressed
+            small
+            class="px-2"
+          >
+            {{ menu.label }}
+          </v-btn>
+        </v-toolbar-items>
+      </v-toolbar>
     </v-app-bar>
-
     <v-main>
-      <router-view/>
+      <router-view />
     </v-main>
   </v-app>
 </template>
 
 <script>
-
 export default {
   name: 'App',
 
   data: () => ({
-    //
+    application: {
+      menus: [{ label: '보드' }, { label: '목록보기' }, { label: '일정보기' }]
+    }
   })
 }
 </script>
+
+<style scoped>
+.v-app-bar {
+  position: fixed !important;
+  top: 0;
+  left: 0;
+  min-height: 50px !important;
+  max-height: 50px !important;
+}
+.v-main {
+  margin-top: 50px !important;
+}
+</style>
