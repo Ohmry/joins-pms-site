@@ -8,9 +8,9 @@ import 'noto-sans-kr/styles.css'
 
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-import { faUserGroup } from '@fortawesome/free-solid-svg-icons'
+import { faDemocrat } from '@fortawesome/free-solid-svg-icons'
 
-library.add(faUserGroup)
+library.add(faDemocrat)
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 
 Vue.config.productionTip = false

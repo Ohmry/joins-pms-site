@@ -1,8 +1,8 @@
 <template>
   <v-app>
-    <v-app-bar flat>
-      <router-link to="/" style="height: 100%">
-        <font-awesome-icon icon="fa-solid fa-user-group" />
+    <v-app-bar flat height="50">
+      <router-link to="/" class="v-app-logo">
+        <font-awesome-icon icon="fa-solid fa-democrat" />
       </router-link>
     </v-app-bar>
     <v-main>
@@ -28,13 +28,14 @@ export default {
   position: fixed !important;
   top: 0;
   left: 0;
-  min-height: 50px !important;
-  max-height: 50px !important;
   background-color: $theme-primay-color !important;
 }
 .v-app-bar > .v-toolbar__content {
   padding: 0 !important;
-  height: 100% !important;
+}
+.v-app-logo {
+  color: white !important;
+  font-size: 25px;
 }
 .v-main {
   margin-top: 50px !important;
