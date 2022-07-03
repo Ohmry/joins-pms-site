@@ -5,32 +5,28 @@
         <font-awesome-icon icon="fa-solid fa-shapes" />
       </router-link>
       <V-divider class="ml-1" style="border-color: #E15369;" vertical />
-      <v-tabs>
-        <v-tabs-slider color="#F7F7F7" />
-        <router-link v-for="(menu, index) in application.menus" :key="'v-app-menu-' + index" :to="'/' + index">
+      <v-toolbar flat height="50" class="v-app-menu-container">
+        <v-item-group mandatory>
+          <router-link v-for="(menu, index) in application.menus" :key="index" :to="menu.uri">
             <v-tooltip bottom>
               <template v-slot:activator="{on, attrs}">
-                <v-tab>
-                  <font-awesome-icon :icon="menu.icon" v-bind="attrs" v-on="on"/>
-                </v-tab>
+                <v-btn depressed v-bind="attrs" v-on="on" class="v-app-menu-button">
+                  <font-awesome-icon :icon="menu.icon" />
+                </v-btn>
               </template>
               <span>{{ menu.label }}</span>
             </v-tooltip>
           </router-link>
-      </v-tabs>
+        </v-item-group>
+      </v-toolbar>
       <v-spacer />
       <v-toolbar-items>
         <router-link to="/mypage">
-          <v-tooltip bottom>
-            <template v-slot:activator="{on, attrs}">
-              <v-badge class="v-app-user-badge mx-auto" bordered bottom color="#00F" offset-x="36" offset-y="36" value="">
-                <v-avatar class="v-app-user" size="36" v-bind="attrs" v-on="on">
-                  <v-img src="@/assets/profile.jpeg" />
-                </v-avatar>
-              </v-badge>
-            </template>
-            <span>My Page</span>
-          </v-tooltip>
+          <v-badge class="v-app-user-badge mx-auto" bordered bottom color="#00F" offset-x="36" offset-y="36" value="">
+            <v-avatar class="v-app-user" size="36" v-bind="attrs" v-on="on">
+              <v-img src="@/assets/profile.jpeg" />
+            </v-avatar>
+          </v-badge>
         </router-link>
       </v-toolbar-items>
     </v-app-bar>
@@ -47,8 +43,8 @@ export default {
   data: () => ({
     application: {
       menus: [
-        { label: 'Project List', icon: 'fa-solid fa-list-check' },
-        { label: 'WorkbreakStructure', icon: 'fa-solid fa-chart-gantt' }
+        { label: 'Project List', icon: 'fa-solid fa-list-check', uri: '/list' },
+        { label: 'WorkbreakStructure', icon: 'fa-solid fa-chart-gantt', uri: 'wbs' }
       ]
     }
   })
@@ -73,19 +69,13 @@ export default {
   color: white !important;
   font-size: 25px;
 }
-.v-tabs-slider {
-  position: absolute;
-  top: 10%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  height: 10px !important;
-  width: 15px !important;
-  border-radius: 150px 150px 0px 0px;
+.v-app-menu-container > .v-toolbar__content {
+  padding: 0px 16px !important;
 }
-.v-tab {
-  height: 25px;
+.v-app-menu-container > .v-toolbar__content > .v-item-group {
+  height: 100%;
 }
-.v-tab > svg {
+.v-app-menu-container > .v-toolbar__content > .v-item-group > a > .v-app-menu-button {
   background-color: transparent !important;
   color: #FF8181 !important;
   height: 100% !important;
@@ -94,8 +84,9 @@ export default {
   font-size: 25px !important;
   padding: 5px 0 !important;
   outline: none !important;
+  border-radius: 0px;
 }
-.v-tab > a.router-link-active {
+.v-app-menu-container > .v-toolbar__content > .v-item-group > a.router-link-active > .v-app-menu-button {
   color: white !important;
 }
 .v-app-user-badge {

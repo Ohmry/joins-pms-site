@@ -8,9 +8,10 @@ import 'noto-sans-kr/styles.css'
 
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-import { faShapes, faListCheck, faChartGantt, faGear } from '@fortawesome/free-solid-svg-icons'
+import { faShapes, faListCheck, faChartGantt, faGear, faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
 
-library.add(faShapes, faListCheck, faChartGantt, faGear)
+library.add(faShapes, faListCheck, faChartGantt, faGear,
+  faMagnifyingGlass)
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 
 Vue.config.productionTip = false
