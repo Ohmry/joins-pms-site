@@ -43,8 +43,8 @@ export default {
   data: () => ({
     application: {
       menus: [
-        { label: 'Project List', icon: 'fa-solid fa-list-check', uri: '/list' },
-        { label: 'WorkbreakStructure', icon: 'fa-solid fa-chart-gantt', uri: 'wbs' }
+        { label: '목록보기', icon: 'fa-solid fa-list-check', uri: '/list' },
+        { label: '차트보기', icon: 'fa-solid fa-chart-gantt', uri: 'wbs' }
       ]
     }
   })
@@ -56,7 +56,7 @@ export default {
   position: fixed !important;
   top: 0;
   left: 0;
-  background-color: $theme-primay-color !important;
+  background-color: $theme-primary-color !important;
 }
 .v-app-bar > div.v-toolbar__content {
   padding: 0 !important;

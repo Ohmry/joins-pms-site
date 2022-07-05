@@ -1,6 +1,9 @@
 <template>
   <v-container fluid>
-    WBS View
+    <ViewTitle
+        title="차트보기"
+        description="등록된 업무를 WBS 형태로 조회합니다."
+      />
   </v-container>
 </template>
 
