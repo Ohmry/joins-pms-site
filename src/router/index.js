@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import DashboardView from '@/views/DashboardView.vue'
 import ListView from '@/views/ListView.vue'
 import WBSView from '@/views/WBSView.vue'
+import ExploreView from '@/views/ExploreView.vue'
 
 Vue.use(VueRouter)
 
@@ -21,6 +22,11 @@ const routes = [
     path: '/wbs',
     name: 'wbs',
     component: WBSView
+  },
+  {
+    path: '/explore',
+    name: 'expolore',
+    component: ExploreView
   }
 ]
 

@@ -9,10 +9,9 @@ import '@/components/common'
 
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-import { faShapes, faListCheck, faChartGantt, faGear, faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
+import { faShapes, faPlus, faCirclePlus } from '@fortawesome/free-solid-svg-icons'
 
-library.add(faShapes, faListCheck, faChartGantt, faGear,
-  faMagnifyingGlass)
+library.add(faShapes, faPlus, faCirclePlus)
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 
 Vue.config.productionTip = false

@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Vuetify from 'vuetify/lib/framework'
 import ko from 'vuetify/lib/locale/ko'
+import 'material-design-icons-iconfont/dist/material-design-icons.min.css'
 
 Vue.use(Vuetify)
 
