@@ -1,3 +1,24 @@
-# joins-pms-api
- - [Setup fontawesome](https://fontawesome.com/docs/web/use-with/vue/)
- - [Reference UI](https://www.youtube.com/watch?v=blYly5U_jfQ)
+# joins-pms-site-new
+
+## Project setup
+```
+npm install
+```
+
+### Compiles and hot-reloads for development
+```
+npm run serve
+```
+
+### Compiles and minifies for production
+```
+npm run build
+```
+
+### Lints and fixes files
+```
+npm run lint
+```
+
+### Customize configuration
+See [Configuration Reference](https://cli.vuejs.org/config/).
