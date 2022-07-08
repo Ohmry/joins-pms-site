@@ -3,12 +3,13 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 import 'noto-sans-kr/styles.css'
+import 'normalize.css'
 
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-import { faShapes, faPlus, faCirclePlus } from '@fortawesome/free-solid-svg-icons'
+import { faShapes, faPlus, faCirclePlus, faFan, faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
 
-library.add(faShapes, faPlus, faCirclePlus)
+library.add(faShapes, faPlus, faCirclePlus, faFan, faMagnifyingGlass)
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 Vue.config.productionTip = false
 

@@ -1,5 +1,5 @@
 {
-  "name": "joins-pms-site-new",
+  "name": "joins-pms-site",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -14,6 +14,7 @@
     "@fortawesome/free-solid-svg-icons": "^6.1.1",
     "@fortawesome/vue-fontawesome": "^2.0.8",
     "core-js": "^3.8.3",
+    "normalize.css": "^8.0.1",
     "noto-sans-kr": "^0.1.1",
     "vue": "^2.6.14",
     "vue-router": "^3.5.1",
