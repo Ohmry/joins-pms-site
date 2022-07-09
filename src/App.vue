@@ -25,7 +25,7 @@ export default {
         },
         menus: [
           { label: '둘러보기', uri: '/explore' },
-          { label: '목록보기', uri: '/board' },
+          { label: '목록보기', uri: '/list' },
           { label: '차트보기', uri: '/chart' }
         ]
       }
@@ -33,7 +33,6 @@ export default {
   },
   methods: {
     buttonClick: function (target) {
-      console.log(target.srcElement)
       target.srcElement.classList.add('clicked')
       setTimeout(() => {
         target.srcElement.classList.remove('clicked')
@@ -44,12 +43,21 @@ export default {
 </script>
 
 <style lang="scss">
+@import "@/styles/variables.scss";
+
+* {
+  font-family: 'Noto Sans Korean', 'Roboto', sans-serif;
+}
 #app {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
 }
-
+span.divider {
+  border-right: 1px solid #b5b5b5;
+  padding: 8px 5px;
+  margin: 0px 10px 0px 0px;
+}
 nav.app-menu-container {
   background-color: #d7102d;
   height: 50px;
@@ -64,25 +72,12 @@ nav.app-menu-container > a > button {
     height: 100%;
     border: 0px;
     background-color: transparent;
-    color: white;
+    color: #FF9EAC;
     cursor: pointer;
     padding: 0 15px;
 }
-nav.app-menu-container > a > button.clicked {
-  animation-duration: 0.3s;
-  animation-name: activeButton;
-}
-@keyframes activeButton {
-  from {
-    background-color: transparent;
-  }
-  30% {
-    background-color: #d7102d;
-    opacity: 0.5;
-  }
-  to {
-    background-color: transparent;
-  }
+nav.app-menu-container > a.router-link-active > button {
+  color: white;
 }
 a.app-logo {
   font-size: 25px;
@@ -134,15 +129,5 @@ a.app-logo > svg:hover {
     transform: rotate(360deg);
     opacity: 0.7;
   }
-}
-span.divider {
-  border-right: 1px solid #b5b5b5;
-  padding: 8px 5px;
-  margin: 0px 10px 0px 0px;
-}
-input.app-total-search {
-  outline: none;
-  width: 200px;
-  font-size: 14px;
 }
 </style>
