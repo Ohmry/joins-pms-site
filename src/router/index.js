@@ -1,7 +1,9 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import HomeView from '../views/HomeView.vue'
-import ListView from '@/views/ListView.vue'
+import ExploreView from '@/views/ExploreView.vue'
+import GroupView from '@/views/GroupView.vue'
+import ProjectView from '@/views/ProjectView.vue'
 
 Vue.use(VueRouter)
 
@@ -12,9 +14,19 @@ const routes = [
     component: HomeView
   },
   {
-    path: '/list',
-    name: 'list',
-    component: ListView
+    path: '/explore',
+    name: 'explore',
+    component: ExploreView
+  },
+  {
+    path: '/group',
+    name: 'group',
+    component: GroupView
+  },
+  {
+    path: '/project',
+    name: 'project',
+    component: ProjectView
   }
 ]
 

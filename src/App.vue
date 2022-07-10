@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <nav class="app-menu-container">
+    <nav class="app-menu-container" v-if="application.nav.visible">
       <router-link class="app-logo" to="/">
         <font-awesome-icon icon="fa-solid fa-fan"></font-awesome-icon>
       </router-link>
@@ -9,6 +9,12 @@
         <button @click="buttonClick">
           {{ menu.label }}
         </button>
+      </router-link>
+      <router-link class="app-nav-button-signup" to="/signup">
+        <button>등록</button>
+      </router-link>
+      <router-link to="/signin">
+        <button>로그인</button>
       </router-link>
     </nav>
     <router-view></router-view>
@@ -20,8 +26,8 @@ export default {
   data: () => {
     return {
       application: {
-        searchbar: {
-          visible: false
+        nav: {
+          visible: true
         },
         menus: [
           { label: '둘러보기', uri: '/explore' },
@@ -29,6 +35,12 @@ export default {
           { label: '프로젝트', uri: '/project' }
         ]
       }
+    }
+  },
+  watch: {
+    $route: function (to, from) {
+      console.log(to.path)
+      this.application.nav.visible = (to.path !== '/signup' && to.path !== '/signin')
     }
   },
   methods: {
@@ -56,17 +68,20 @@ export default {
 span.divider {
   border-right: 1px solid #b5b5b5;
   padding: 8px 5px;
-  margin: 0px 10px 0px 0px;
+  margin: 5px 10px 5px 0px;
 }
 nav.app-menu-container {
   background-color: #d7102d;
   height: 50px;
-  line-height: 50px;
   padding: 0px 10px;
+  display: flex;
 }
 nav.app-menu-container > a {
   text-decoration: none;
   color: white;
+}
+nav.app-menu-container > a.app-nav-button-signup {
+  margin: 0 0 0 auto;
 }
 nav.app-menu-container > a > button {
     height: 100%;
@@ -82,8 +97,7 @@ nav.app-menu-container > a.router-link-active > button {
 }
 a.app-logo {
   font-size: 25px;
-  vertical-align: middle;
-  padding: 0 5px;
+  padding: 10px 5px;
 }
 a.app-logo > svg:hover {
   animation: spinLogo 1.5s infinite;
