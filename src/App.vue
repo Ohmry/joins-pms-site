@@ -25,8 +25,8 @@ export default {
         },
         menus: [
           { label: '둘러보기', uri: '/explore' },
-          { label: '목록보기', uri: '/list' },
-          { label: '차트보기', uri: '/chart' }
+          { label: '그룹', uri: '/group' },
+          { label: '프로젝트', uri: '/project' }
         ]
       }
     }
@@ -75,6 +75,7 @@ nav.app-menu-container > a > button {
     color: #FF9EAC;
     cursor: pointer;
     padding: 0 15px;
+    font-weight: bold;
 }
 nav.app-menu-container > a.router-link-active > button {
   color: white;
