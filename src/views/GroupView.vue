@@ -1,15 +1,15 @@
 <template>
   <main>
-    This is Group View.
+    <NavigatorComponent />
+    This is GroupView.
   </main>
 </template>
 
 <script>
+import NavigatorComponent from '@/components/NavigatorComponent.vue'
 export default {
-
+  components: {
+    NavigatorComponent
+  }
 }
 </script>
-
-<style>
-
-</style>

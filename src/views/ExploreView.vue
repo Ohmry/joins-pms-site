@@ -1,15 +1,15 @@
 <template>
   <main>
-    This is Explore View.
+    <NavigatorComponent />
+    This is ExploreView.
   </main>
 </template>
 
 <script>
+import NavigatorComponent from '@/components/NavigatorComponent.vue'
 export default {
-
+  components: {
+    NavigatorComponent
+  }
 }
 </script>
-
-<style>
-
-</style>

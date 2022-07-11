@@ -1,15 +1,15 @@
 <template>
   <main>
-    This is Project View.
+    <NavigatorComponent />
+    This is ProjectView.
   </main>
 </template>
 
 <script>
+import NavigatorComponent from '@/components/NavigatorComponent.vue'
 export default {
-
+  components: {
+    NavigatorComponent
+  }
 }
 </script>
-
-<style>
-
-</style>
