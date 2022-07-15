@@ -53,6 +53,7 @@ nav.app-menu-container {
   height: 50px;
   padding: 0px 10px;
   display: flex;
+  user-select: none;
   a {
     text-decoration: none;
     color: var(--button-active-color);
@@ -74,7 +75,9 @@ nav.app-menu-container {
       color: var(--button-not-active-color);
       cursor: pointer;
       padding: 0 15px;
-      font-weight: bold;
+      &:active {
+        color: white;
+      }
     }
   }
 }

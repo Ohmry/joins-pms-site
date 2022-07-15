@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import HomeView from '../views/HomeView.vue'
+import IntroView from '../views/IntroView.vue'
 import ExploreView from '@/views/ExploreView.vue'
 import GroupView from '@/views/GroupView.vue'
 import ProjectView from '@/views/ProjectView.vue'
@@ -12,8 +12,8 @@ Vue.use(VueRouter)
 const routes = [
   {
     path: '/',
-    name: 'home',
-    component: HomeView
+    name: 'intro',
+    component: IntroView
   },
   {
     path: '/explore',

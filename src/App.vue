@@ -22,18 +22,32 @@ export default {
 </script>
 
 <style lang="scss">
+@import url(//fonts.googleapis.com/earlyaccess/jejugothic.css);
 * {
-  font-family: 'Noto Sans Korean', 'Roboto', sans-serif;
+  // font-family: 'Noto Sans Korean', 'Roboto', sans-serif;
+  font-family: 'Jeju Gothic', 'Roboto', sans-serif;
 }
 :root {
-  --background-color: F7F7F7;
+  --background-color: #F7F7F7;
+  --foreground-color: #ADADAD;
   --primary-color: #D7102D;
   --secondary-color: #F25A71;
+  --font-link-color: #0427D4;
+  --third-color: #6E2933;
   --button-active-color: white;
   --button-not-active-color: #FF9EAC;
 }
 #app {
   height: 100vh;
   background-color: var(--background-color);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: auto;
+}
+a {
+  color: var(--font-link-color);
+  text-decoration: none;
+  &:hover {
+    text-decoration: underline;
+  }
 }
 </style>

@@ -1,9 +1,11 @@
 <template>
   <main>
+    <section class="signin-logo">
+        <router-link class="logo" to="/">
+          <font-awesome-icon icon="fa-solid fa-fan"></font-awesome-icon>
+        </router-link>
+    </section>
     <section class="signin-box">
-      <router-link class="logo" to="/">
-        <font-awesome-icon icon="fa-solid fa-fan"></font-awesome-icon>
-      </router-link>
       <section class="label">
         이메일 주소
       </section>
@@ -11,8 +13,12 @@
       <section class="label">
         비밀번호
       </section>
-      <input type="email" v-model="user.email" />
-      <button @click="signin">로그인</button>
+      <input type="password" v-model="user.password" />
+      <button class="signin-button" @click="signin">로그인</button>
+      <a href="/user/reset">이메일 혹은 비밀번호를 잊어버리셨나요?</a>
+    </section>
+    <section class="signup-box">
+      <a href="/signup">새로운 계정</a><span>을 만들고 싶으신가요?</span>
     </section>
     <!--
     <router-link class="logo" to="/">
@@ -67,105 +73,80 @@ export default {
 main {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  text-align: center;
+  // justify-content: center;
   height: 100vh;
 
+  section.signin-logo {
+    width: 380px;
+    align-self: center;
+    padding: 30px 0 20px 0;
+
+    a.logo {
+      font-size: 80px;
+      text-align: center;
+      color: var(--primary-color);
+      &:active {
+        color: var(--secondary-color);
+      }
+    }
+  }
   section.signin-box {
       width: 380px;
-      height: 560px;
-      border: 1px solid var(--secondary-color);
+      border: 1px solid var(--foreground-color);
       border-radius: 10px;
-      background-color: var(--secondary-color);
+      background-color: white;
       align-self: center;
       text-align: center;
-      padding: 30px 10px 0px 10px;
+      padding: 40px 10px 20px 10px;
+      user-select: none;
 
-      a.logo {
-        font-size: 120px;
-        color: white;
-        svg {
-          animation: sigin-spin-logo 36s infinite;
-          animation-timing-function: linear;
-        }
-      }
       section.label {
-        font-size: 18px;
+        font-size: 16px;
         text-align: left;
-        color: white;
-        font-weight: bold;
-        padding: 10px 50px;
+        padding: 10px 30px;
       }
       input {
         display: block;
-        margin: 0px 50px;
-        padding: 5px;
+        margin: 0px 30px;
+        height: 25px;
+        padding: 10px;
         outline: none;
-        width: 266px;
+        width: 298px;
+        border: 1px solid var(--foreground-color);
+        border-radius: 5px
       }
-      button {
-        width: 266px;
-        border: 1px solid var(--secondary-color);
+      button.signin-button {
+        display: block;
+        width: 320px;
+        border: 0;
         border-radius: 5px;
-        padding: 10px 20px;
-        margin: 10px;
+        margin: 20px 30px;
+        padding: 15px 10px;
+        background-color: var(--primary-color);
+        color: white;
+        &:hover {
+          cursor: pointer;
+        }
+        &:active {
+          background-color: var(--secondary-color);
+        }
+      }
+      a {
+        text-decoration: none;
+        font-size: 14px;
+        color: var(--font-link-color);
+        &:hover {
+          text-decoration: underline;
+        }
       }
   }
-}
-@keyframes sigin-spin-logo {
-  from {
-    -webkit-transform: rotate(0deg);
-    -o-transform: rotate(0deg);
-    transform: rotate(0deg);
-  }
-  to {
-    -webkit-transform: rotate(360deg);
-    -o-transform: rotate(360deg);
-    transform: rotate(360deg);
-  }
-}
-/*
-main {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  height: 100vh;
-
-  section {
-    align-self: center;
-
-    h4 {
-      display: inline-block;
-      width: 70px;
-      margin: 5px 0;
-      padding: 0 10px 0 0;
-      text-align: right;
-    }
-    input[type=text] {
-      width: 212px;
+  section.signup-box {
+    padding: 10px;
+    a {
+      font-size: 14px;
+      padding: 5px;
     }
   }
 }
-.logo {
-  text-align: center;
-  font-size: 50px;
-  color: var(--primary-color);
-}
-
-section.btnbox {
-  padding: 15px 0 0 0;
-  button.signin {
-    width: 300px;
-    background-color: var(--primary-color);
-    border: 1px solid var(--primary-color);
-    border-radius: 5px;
-    padding: 10px 0;
-    color: white;
-    cursor: pointer;
-
-    &:active {
-      background-color: green;
-    }
-  }
-}
-*/
 </style>
