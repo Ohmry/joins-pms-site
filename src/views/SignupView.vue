@@ -19,13 +19,12 @@
       <input type="name" v-model="user.name" />
     </section>
     <section class="btnbox">
-      <button @click="test">등록</button>
+      <button @click="signup">등록</button>
     </section>
   </main>
 </template>
 
 <script>
-import axios from 'axios'
 export default {
   data: () => {
     return {
@@ -37,27 +36,20 @@ export default {
     }
   },
   methods: {
-    test: function () {
-      axios({
-        method: 'post',
-        url: '/api/test',
-        baseURL: 'http://localhost:9091',
-        data: JSON.stringify({ message: 'Hello World' }),
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      }).then(response => console.log(response)).catch(err => console.error(err))
-    },
     signup: function () {
-      axios({
+      this.$axios({
         method: 'post',
         url: '/api/signup',
-        baseURL: 'http://localhost:9091/',
+        baseURL: this.$apiUrl,
         data: JSON.stringify(this.user),
         headers: {
           'Content-Type': 'application/json'
         }
-      }).then(response => console.log(response)).catch(err => console.error(err))
+      }).then(response => {
+        console.log(response.data)
+      }).catch(err => {
+        console.err(err)
+      })
     }
   }
 }

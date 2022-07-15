@@ -26,8 +26,9 @@ export default {
   font-family: 'Noto Sans Korean', 'Roboto', sans-serif;
 }
 :root {
-  --background-color: #E7E7E7;
+  --background-color: F7F7F7;
   --primary-color: #D7102D;
+  --secondary-color: #F25A71;
   --button-active-color: white;
   --button-not-active-color: #FF9EAC;
 }
