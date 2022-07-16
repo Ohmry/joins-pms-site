@@ -3,6 +3,7 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 import axios from 'axios'
+import api from '@/modules/api'
 import 'noto-sans-kr/styles.css'
 import 'normalize.css'
 
@@ -15,6 +16,7 @@ library.add(faShapes, faPlus, faCirclePlus, faFan, faMagnifyingGlass)
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 Vue.config.productionTip = false
 
+Vue.prototype.$api = api
 Vue.prototype.$axios = axios
 Vue.prototype.$apiUrl = 'http://localhost:9091'
 

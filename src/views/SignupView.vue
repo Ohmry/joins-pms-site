@@ -103,7 +103,7 @@ main {
         outline: none;
         width: 298px;
         border: 1px solid var(--foreground-color);
-        border-radius: 5px
+        border-radius: 5px;
       }
       button.signup-button {
         display: block;

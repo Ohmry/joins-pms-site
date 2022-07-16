@@ -38,6 +38,11 @@ export default {
         target.srcElement.classList.remove('clicked')
       }, 200)
     }
+  },
+  beforeMount: function () {
+    console.log(this.$store.getters.accessToken)
+    console.log(this.$store.state.accessToken)
+    console.log(this.$store)
   }
 }
 </script>

@@ -22,11 +22,6 @@ export default {
 </script>
 
 <style lang="scss">
-@import url(//fonts.googleapis.com/earlyaccess/jejugothic.css);
-* {
-  // font-family: 'Noto Sans Korean', 'Roboto', sans-serif;
-  font-family: 'Jeju Gothic', 'Roboto', sans-serif;
-}
 :root {
   --background-color: #F7F7F7;
   --foreground-color: #ADADAD;
