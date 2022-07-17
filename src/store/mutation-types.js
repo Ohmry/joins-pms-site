@@ -1,3 +1,0 @@
-export const SAVE_TOKEN = 'SAVE_TOKEN'
-export const GET_ACCESS_TOKEN = 'GET_ACCESS_TOKEN'
-export const GET_REFRESH_TOKEN = 'GET_REFRESH_TOKEN'

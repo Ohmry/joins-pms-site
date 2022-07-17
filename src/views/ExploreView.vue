@@ -1,15 +1,25 @@
 <template>
   <main>
-    <NavigatorComponent />
+    <AppNavigator />
     This is ExploreView.
+    <button @click="getUserInfo">Click</button>
   </main>
 </template>
 
 <script>
-import NavigatorComponent from '@/components/NavigatorComponent.vue'
+import AppNavigator from '@/components/AppNavigator.vue'
 export default {
   components: {
-    NavigatorComponent
+    AppNavigator
+  },
+  methods: {
+    getUserInfo: function () {
+      const userId = localStorage.getItem('userId')
+      this.$api
+        .get('/api/user/' + userId)
+        .then((response) => console.log(response))
+        .catch((err) => console.error(err))
+    }
   }
 }
 </script>

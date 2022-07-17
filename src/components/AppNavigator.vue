@@ -1,5 +1,5 @@
 <template>
-  <nav class="app-menu-container">
+  <nav>
       <router-link class="app-logo" to="/">
         <font-awesome-icon icon="fa-solid fa-fan"></font-awesome-icon>
       </router-link>
@@ -9,12 +9,11 @@
           {{ menu.label }}
         </button>
       </router-link>
-      <router-link class="app-nav-button-signup" to="/signup">
-        <button>등록</button>
-      </router-link>
-      <router-link to="/signin">
-        <button>로그인</button>
-      </router-link>
+      <section class="user-menu-container">
+        <button v-if="!application.accessToken" @click="signup">등록</button>
+        <button v-if="!application.accessToken" @click="signin">로그인</button>
+        <button v-if="application.accessToken" @click="signout">로그아웃</button>
+      </section>
     </nav>
 </template>
 
@@ -27,7 +26,8 @@ export default {
           { label: '둘러보기', uri: '/explore' },
           { label: '그룹', uri: '/group' },
           { label: '프로젝트', uri: '/project' }
-        ]
+        ],
+        accessToken: ''
       }
     }
   },
@@ -37,58 +37,66 @@ export default {
       setTimeout(() => {
         target.srcElement.classList.remove('clicked')
       }, 200)
+    },
+    signup: function () {
+      this.$router.replace('/signup')
+    },
+    signin: function () {
+      this.$router.replace('/signin')
+    },
+    signout: function () {
+      this.application.accessToken = ''
+      localStorage.removeItem('userId')
+      localStorage.removeItem('accessToken')
+      localStorage.removeItem('refreshToken')
     }
   },
   beforeMount: function () {
-    console.log(this.$store.getters.accessToken)
-    console.log(this.$store.state.accessToken)
-    console.log(this.$store)
+    this.application.accessToken = localStorage.getItem('accessToken')
   }
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 span.divider {
   border-right: 1px solid #b5b5b5;
   padding: 8px 5px;
   margin: 5px 10px 5px 0px;
 }
-nav.app-menu-container {
+nav {
   background-color: var(--primary-color);
   height: 50px;
   padding: 0px 10px;
   display: flex;
   user-select: none;
+
   a {
-    text-decoration: none;
-    color: var(--button-active-color);
-
-    &.app-nav-button-signup {
-      margin: 0 0 0 auto;
-    }
-
     &.router-link-active {
       button {
         color: var(--button-active-color);
       }
     }
+  }
 
-    button {
-      height: 100%;
-      border: 0px;
-      background-color: transparent;
-      color: var(--button-not-active-color);
-      cursor: pointer;
-      padding: 0 15px;
-      &:active {
-        color: white;
-      }
-    }
+  section.user-menu-container {
+    margin: 0 0 0 auto;
+  }
+}
+button {
+  height: 100%;
+  border: 0px;
+  background-color: transparent;
+  color: var(--button-not-active-color);
+  cursor: pointer;
+  padding: 0 15px;
+  &:active {
+    color: var(--button-active-color);
   }
 }
 a.app-logo {
   font-size: 25px;
   padding: 10px 5px;
+  color: white;
 
   svg:hover {
     animation: spinLogo 1.5s infinite;

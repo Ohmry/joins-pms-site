@@ -20,7 +20,6 @@
 </template>
 
 <script>
-import { SAVE_TOKEN } from '@/store/mutation-types'
 export default {
   data: () => {
     return {
@@ -35,8 +34,10 @@ export default {
       this.$api
         .post('api/signin', JSON.stringify(this.user))
         .then((response) => {
-          this.$store.dispatch(SAVE_TOKEN, response.data)
-          this.$router.replace('/')
+          localStorage.setItem('userId', response.data.id)
+          localStorage.setItem('accessToken', response.data.accessToken)
+          localStorage.setItem('refreshToken', response.data.refreshToken)
+          this.$router.replace('/explore')
         })
         .catch((err) => {
           console.error(err)

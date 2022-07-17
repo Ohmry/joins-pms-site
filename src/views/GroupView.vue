@@ -1,15 +1,15 @@
 <template>
   <main>
-    <NavigatorComponent />
+    <AppNavigator />
     This is GroupView.
   </main>
 </template>
 
 <script>
-import NavigatorComponent from '@/components/NavigatorComponent.vue'
+import AppNavigator from '@/components/AppNavigator.vue'
 export default {
   components: {
-    NavigatorComponent
+    AppNavigator
   }
 }
 </script>
