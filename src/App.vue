@@ -26,6 +26,7 @@ export default {
 <style lang="scss">
 :root {
   --background-color: #F7F7F7;
+  --background-secondary-color: #E7E7E7;
   --foreground-color: #ADADAD;
   --primary-color: #D7102D;
   --secondary-color: #F25A71;

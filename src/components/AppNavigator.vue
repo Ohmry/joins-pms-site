@@ -10,9 +10,9 @@
         </button>
       </router-link>
       <section class="user-menu-container">
-        <button v-if="!application.accessToken" @click="signup">등록</button>
-        <button v-if="!application.accessToken" @click="signin">로그인</button>
-        <button v-if="application.accessToken" @click="signout">로그아웃</button>
+        <button v-if="isSignined" @click="signup">등록</button>
+        <button v-if="!isSignined" @click="signin">로그인</button>
+        <button v-if="isSignined" @click="signout">로그아웃</button>
       </section>
     </nav>
 </template>
@@ -21,14 +21,26 @@
 export default {
   data: () => {
     return {
+      user: {
+        id: undefined,
+        email: undefined,
+        name: undefined,
+        accessToken: undefined,
+        refreshToken: undefined
+      },
       application: {
         menus: [
           { label: '둘러보기', uri: '/explore' },
           { label: '그룹', uri: '/group' },
           { label: '프로젝트', uri: '/project' }
-        ],
-        accessToken: ''
+        ]
       }
+    }
+  },
+  computed: {
+    isSignined: function () {
+      if (!this.user) return false
+      return this.user.id !== undefined && this.user.id !== ''
     }
   },
   methods: {
@@ -50,17 +62,15 @@ export default {
         contents: '로그아웃 하시겠습니까?',
         callback: result => {
           if (result) {
-            this.application.accessToken = ''
-            sessionStorage.removeItem('userId')
-            sessionStorage.removeItem('accessToken')
-            sessionStorage.removeItem('refreshToken')
+            this.user = {}
+            sessionStorage.removeItem('user')
           }
         }
       })
     }
   },
   beforeMount: function () {
-    this.application.accessToken = sessionStorage.getItem('accessToken')
+    this.user = JSON.parse(sessionStorage.getItem('user'))
   }
 }
 </script>

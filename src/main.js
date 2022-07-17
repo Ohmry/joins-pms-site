@@ -10,9 +10,25 @@ import './components/installer'
 
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-import { faShapes, faPlus, faCirclePlus, faFan, faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
+import {
+  faShapes,
+  faPlus,
+  faCirclePlus,
+  faFan,
+  faMagnifyingGlass,
+  faUserTie,
+  faBuilding
+} from '@fortawesome/free-solid-svg-icons'
 
-library.add(faShapes, faPlus, faCirclePlus, faFan, faMagnifyingGlass)
+library.add(
+  faShapes,
+  faPlus,
+  faCirclePlus,
+  faFan,
+  faMagnifyingGlass,
+  faUserTie,
+  faBuilding
+)
 
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 Vue.config.productionTip = false
@@ -24,5 +40,5 @@ Vue.prototype.$apiUrl = 'http://localhost:9091'
 new Vue({
   router,
   store,
-  render: h => h(App)
+  render: (h) => h(App)
 }).$mount('#app')
