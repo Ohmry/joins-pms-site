@@ -1,6 +1,8 @@
 <template>
   <div id="app">
     <router-view></router-view>
+    <AppAlert />
+    <AppConfirm />
   </div>
 </template>
 

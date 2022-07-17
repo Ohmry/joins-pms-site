@@ -49,7 +49,11 @@ export default {
           'Content-Type': 'application/json'
         }
       }).then(response => {
-        console.log(response.data)
+        this.$alert({
+          title: '사용자 등록 완료',
+          contents: '사용자 등록이 완료되었습니다. 로그인 화면으로 이동합니다.'
+        })
+        this.$router.replace('/signin')
       }).catch(err => {
         console.error(err)
       })

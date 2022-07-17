@@ -6,6 +6,7 @@ import axios from 'axios'
 import api from '@/modules/api'
 import 'noto-sans-kr/styles.css'
 import 'normalize.css'
+import './components/installer'
 
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'

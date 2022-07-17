@@ -3,23 +3,23 @@
     <AppNavigator />
     <section class="container">
       This is IntroView.
-      <button @click="callAPI">Click</button>
+      <button @click="open">Click</button>
     </section>
   </main>
 </template>
 
 <script>
-import AppNavigator from '@/components/AppNavigator.vue'
+import { AppNavigator } from '@/components'
 export default {
   components: {
     AppNavigator
   },
   methods: {
-    callAPI: function () {
-      this.$api
-        .get('/api/test')
-        .then((response) => console.log(response))
-        .catch((err) => console.error(err))
+    open: function () {
+      this.$alert({
+        title: 'TEST',
+        contents: 'TEST'
+      })
     }
   }
 }

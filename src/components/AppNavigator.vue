@@ -45,14 +45,22 @@ export default {
       this.$router.replace('/signin')
     },
     signout: function () {
-      this.application.accessToken = ''
-      localStorage.removeItem('userId')
-      localStorage.removeItem('accessToken')
-      localStorage.removeItem('refreshToken')
+      this.$confirm({
+        title: '로그아웃',
+        contents: '로그아웃 하시겠습니까?',
+        callback: result => {
+          if (result) {
+            this.application.accessToken = ''
+            sessionStorage.removeItem('userId')
+            sessionStorage.removeItem('accessToken')
+            sessionStorage.removeItem('refreshToken')
+          }
+        }
+      })
     }
   },
   beforeMount: function () {
-    this.application.accessToken = localStorage.getItem('accessToken')
+    this.application.accessToken = sessionStorage.getItem('accessToken')
   }
 }
 </script>
