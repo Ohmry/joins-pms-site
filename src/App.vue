@@ -3,14 +3,15 @@
     <router-view></router-view>
     <AppAlert />
     <AppConfirm />
+    <AppContextMenu />
   </div>
 </template>
 
 <script>
+import AppContextMenu from './components/installer/AppContextMenu/AppContextMenu.vue'
 export default {
   data: () => {
-    return {
-    }
+    return {}
   },
   methods: {
     buttonClick: function (target) {
@@ -19,21 +20,22 @@ export default {
         target.srcElement.classList.remove('clicked')
       }, 200)
     }
-  }
+  },
+  components: { AppContextMenu }
 }
 </script>
 
 <style lang="scss">
 :root {
-  --background-color: #F7F7F7;
-  --background-secondary-color: #E7E7E7;
-  --foreground-color: #ADADAD;
-  --primary-color: #D7102D;
-  --secondary-color: #F25A71;
-  --font-link-color: #0427D4;
-  --third-color: #6E2933;
+  --background-color: #f7f7f7;
+  --background-secondary-color: #e7e7e7;
+  --foreground-color: #adadad;
+  --primary-color: #d7102d;
+  --secondary-color: #f25a71;
+  --font-link-color: #0427d4;
+  --third-color: #6e2933;
   --button-active-color: white;
-  --button-not-active-color: #FF9EAC;
+  --button-not-active-color: #ff9eac;
 }
 #app {
   height: 100vh;

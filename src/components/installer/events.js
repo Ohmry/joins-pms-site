@@ -8,4 +8,8 @@ const AppConfirmEvents = new Vue({
   name: 'AppConfirm'
 })
 
-export { AppAlertEvents, AppConfirmEvents }
+const AppContextMenuEvents = new Vue({
+  name: 'AppContextMenu'
+})
+
+export { AppAlertEvents, AppConfirmEvents, AppContextMenuEvents }

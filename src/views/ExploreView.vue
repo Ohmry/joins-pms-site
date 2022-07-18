@@ -5,7 +5,7 @@
       <section class="explore-schedule-container">
         <article>
           <span>최근 방문한 일정</span>
-          <button>새 일정</button>
+          <button @click="open">새 일정</button>
         </article>
         <ul class="explore-schedule-list">
           <li>일정 1</li>
@@ -43,6 +43,9 @@ export default {
     }
   },
   methods: {
+    open: function (e) {
+      this.$contextmenu(e)
+    }
   }
 }
 </script>
