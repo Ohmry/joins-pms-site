@@ -1,10 +1,6 @@
 <template>
   <main>
-    <section class="signup-logo">
-        <router-link class="logo" to="/">
-          <font-awesome-icon icon="fa-solid fa-fan"></font-awesome-icon>
-        </router-link>
-    </section>
+    <h1>일정관리서비스 사용자 등록</h1>
     <section class="signup-box">
       <section class="label">
         이메일 주소
@@ -69,6 +65,10 @@ main {
   text-align: center;
   height: 100vh;
 
+  h1 {
+    color: var(--primary-color);
+    padding: 30px 0 20px 0;
+  }
   section.signup-logo {
     width: 380px;
     align-self: center;
@@ -112,6 +112,7 @@ main {
       button.signup-button {
         display: block;
         width: 320px;
+        font-size: 18px;
         border: 0;
         border-radius: 5px;
         margin: 20px 30px;

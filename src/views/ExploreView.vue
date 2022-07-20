@@ -4,24 +4,25 @@
     <section class="explore-view-container">
       <section class="explore-schedule-container">
         <article>
-          <span>최근 방문한 일정</span>
-          <button @click="open">새 일정</button>
+          <span>최근 열람한 프로젝트</span>
+          <button @click="open">만들기</button>
         </article>
         <ul class="explore-schedule-list">
-          <li>일정 1</li>
-          <li>일정 2</li>
-          <li>일정 3</li>
-          <li>일정 4</li>
+          <li v-for="(project, index) in recentProjects" :key="index">
+            <font-awesome-icon icon="fa-solid fa-caret-right"></font-awesome-icon>
+            <span>{{ project.title }}</span>
+          </li>
         </ul>
+        <button class="btn-more">더보기</button>
         <div class="divider"></div>
         <article>
           <span>내가 속한 그룹</span>
         </article>
         <ul class="explore-group-list">
-          <li>그룹 1</li>
-          <li>그룹 2</li>
-          <li>그룹 3</li>
-          <li>그룹 4</li>
+          <li v-for="(group, index) in belongGroups" :key="index">
+            <font-awesome-icon icon="fa-solid fa-caret-right"></font-awesome-icon>
+            <span>{{ group.name }}</span>
+          </li>
         </ul>
       </section>
       <section class="explore-activity-container">
@@ -40,6 +41,17 @@ export default {
   },
   data: () => {
     return {
+      recentProjects: [
+        { title: '메가박스 포인트 부분 사용' },
+        { title: '페이즈 금액권 기능 개발' },
+        { title: '삼성페이 멤버십 연동' }
+      ],
+      belongGroups: [
+        { name: '메가박스' },
+        { name: '스크린개발팀' },
+        { name: '운영파트' },
+        { name: '모바일오더 프로젝트 그룹' }
+      ]
     }
   },
   methods: {
@@ -66,6 +78,10 @@ section.explore-view-container {
         text-decoration: underline;
         cursor: pointer;
       }
+
+      svg {
+        margin: 0 10px 0 0;
+      }
     }
   }
 
@@ -88,7 +104,7 @@ section.explore-view-container {
 
       button {
         border: 0;
-        background-color: var(--secondary-color);
+        background-color: var(--primary-color);
         color: white;
         font-weight: normal;
         font-size: 14px;
@@ -99,7 +115,7 @@ section.explore-view-container {
           cursor: pointer;
         }
         &:active {
-          background-color: var(--primary-color);
+          background-color: var(--secondary-color);
         }
       }
     }
@@ -109,6 +125,17 @@ section.explore-view-container {
       padding: 20px 0 0 0;
       margin: 0 0 20px 0;
       border-bottom: 1px solid var(--foreground-color);
+    }
+
+    button.btn-more {
+      margin: 15px 0 0 0;
+      border: 0;
+      color: #6E6E6E;
+      background-color: transparent !important;
+      &:hover {
+        cursor: pointer;
+        text-decoration: underline;
+      }
     }
   }
   section.explore-activity-container {

@@ -1,24 +1,29 @@
 <template>
   <nav>
-      <router-link class="app-logo" to="/">
+      <!-- <router-link class="app-logo" to="/">
         <font-awesome-icon icon="fa-solid fa-fan"></font-awesome-icon>
       </router-link>
-      <span class="divider"></span>
+      <span class="divider"></span> -->
       <router-link v-for="(menu, index) in application.menus" :key="index" :to="menu.uri">
-        <button @click="buttonClick">
+        <button>
           {{ menu.label }}
         </button>
       </router-link>
       <section class="user-menu-container">
-        <button v-if="isSignined" @click="signup">등록</button>
+        <img v-if="isSignined" src="@/assets/profile.jpeg" @click="openMyMenu"/>
+        <UserContextMenu :visible="application.myMenu.visible" @close="closeMyMenu"/>
+        <button v-if="!isSignined" @click="signup">등록</button>
         <button v-if="!isSignined" @click="signin">로그인</button>
-        <button v-if="isSignined" @click="signout">로그아웃</button>
       </section>
     </nav>
 </template>
 
 <script>
+import UserContextMenu from '@/components/UserContextMenu.vue'
 export default {
+  components: {
+    UserContextMenu
+  },
   data: () => {
     return {
       user: {
@@ -33,7 +38,10 @@ export default {
           { label: '둘러보기', uri: '/explore' },
           { label: '그룹', uri: '/group' },
           { label: '프로젝트', uri: '/project' }
-        ]
+        ],
+        myMenu: {
+          visible: false
+        }
       }
     }
   },
@@ -44,29 +52,17 @@ export default {
     }
   },
   methods: {
-    buttonClick: function (target) {
-      target.srcElement.classList.add('clicked')
-      setTimeout(() => {
-        target.srcElement.classList.remove('clicked')
-      }, 200)
+    openMyMenu: function (e) {
+      this.application.myMenu.visible = !this.application.myMenu.visible
+    },
+    closeMyMenu: function (e) {
+      this.application.myMenu.visible = false
     },
     signup: function () {
       this.$router.replace('/signup')
     },
     signin: function () {
       this.$router.replace('/signin')
-    },
-    signout: function () {
-      this.$confirm({
-        title: '로그아웃',
-        contents: '로그아웃 하시겠습니까?',
-        callback: result => {
-          if (result) {
-            this.user = {}
-            sessionStorage.removeItem('user')
-          }
-        }
-      })
     }
   },
   beforeMount: function () {
@@ -99,11 +95,21 @@ nav {
   section.user-menu-container {
     margin: 0 0 0 auto;
   }
+
+  img {
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    border: 1px solid var(--background-color);
+    margin: 3px 0 3px auto;
+    cursor: pointer;
+  }
 }
 button {
   height: 100%;
   border: 0px;
   background-color: transparent;
+  font-size: 16px;
   color: var(--button-not-active-color);
   cursor: pointer;
   padding: 0 15px;

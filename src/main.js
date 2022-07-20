@@ -17,7 +17,8 @@ import {
   faFan,
   faMagnifyingGlass,
   faUserTie,
-  faBuilding
+  faBuilding,
+  faCaretRight
 } from '@fortawesome/free-solid-svg-icons'
 
 library.add(
@@ -27,7 +28,8 @@ library.add(
   faFan,
   faMagnifyingGlass,
   faUserTie,
-  faBuilding
+  faBuilding,
+  faCaretRight
 )
 
 Vue.component('font-awesome-icon', FontAwesomeIcon)

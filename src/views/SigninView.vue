@@ -1,10 +1,11 @@
 <template>
   <main>
-    <section class="signin-logo">
+    <!-- <section class="signin-logo">
       <router-link class="logo" to="/">
         <font-awesome-icon icon="fa-solid fa-fan"></font-awesome-icon>
       </router-link>
-    </section>
+    </section> -->
+    <h1>일정관리서비스 로그인</h1>
     <section class="signin-box">
       <section class="label">이메일 주소</section>
       <input type="email" v-model="user.email" />
@@ -59,6 +60,11 @@ main {
   // justify-content: center;
   height: 100vh;
 
+  h1 {
+    color: var(--primary-color);
+    padding: 30px 0 20px 0;
+  }
+
   section.signin-logo {
     width: 380px;
     align-self: center;
@@ -101,6 +107,7 @@ main {
     button.signin-button {
       display: block;
       width: 320px;
+      font-size: 18px;
       border: 0;
       border-radius: 5px;
       margin: 20px 30px;

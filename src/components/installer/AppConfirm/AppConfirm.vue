@@ -1,6 +1,6 @@
 <template>
   <main v-if="visible">
-    <section>
+    <section class="app-confirm-container">
       <h3>{{ title }}</h3>
       <article>
         {{ contents }}
@@ -65,11 +65,17 @@ main {
   justify-content: center;
 
   section {
-    width: 300px;
     height: fit-content;
     background-color: var(--background-color);
     align-self: center;
     padding: 20px 25px;
+
+    &.app-confirm-container {
+      min-width: 300px;
+      border: 1px solid #6E6E6E;
+      border-radius: 5px;
+    }
+
     h3 {
       font-weight: normal;
       margin: 10px 0 0 0;

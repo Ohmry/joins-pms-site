@@ -8,28 +8,27 @@ export default {
 
     Vue.component('AppContextMenu', AppContextMenu)
 
-    const contextmenu = (params) => {
-      if (typeof params !== 'object' || Array.isArray(params)) {
-        let caughtType = typeof params
-        if (Array.isArray(params)) caughtType = 'array'
-
+    const contextmenu = (e, params) => {
+      if (!(e instanceof PointerEvent)) {
+        const caughtType = e.constructor.name
         throw new Error(
-          `Options type must be an object. Caught: ${caughtType}. Expected: object`
+          `e type must be an PointerEvnet. Caught: ${caughtType}. Excepted: PointerEvent`
         )
       }
 
-      if (typeof params === 'object') {
-        if (
-          Object.prototype.hasOwnProperty.call(params, 'callback') &&
-          typeof params.callback !== 'function'
-        ) {
-          const callbackType = typeof params.callback
-          throw new Error(
-            `Callback type must be an function. Caught: ${callbackType}. Expected: function`
-          )
+      if (params) {
+        if (typeof params !== 'object' || Array.isArray(params)) {
+          throw new Error('Options type must be an object. Caught: array. Expected: object')
+        } else if (typeof params === 'object') {
+          if (Object.prototype.hasOwnProperty.call(params, 'callback') && typeof params.callback !== 'function') {
+            const callbackType = typeof params.callback
+            throw new Error(
+              `Callback type must be an function. Caught: ${callbackType}. Expected: function`
+            )
+          }
         }
-        AppContextMenuEvents.$emit('open', params)
       }
+      AppContextMenuEvents.$emit('open', e, params)
     }
 
     contextmenu.close = () => {
