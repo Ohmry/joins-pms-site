@@ -1,19 +1,15 @@
 <template>
   <nav>
-      <!-- <router-link class="app-logo" to="/">
-        <font-awesome-icon icon="fa-solid fa-fan"></font-awesome-icon>
-      </router-link>
-      <span class="divider"></span> -->
+      <span data-type="logo">WORKUS</span>
+      <span class="divider"></span>
       <router-link v-for="(menu, index) in application.menus" :key="index" :to="menu.uri">
         <button>
           {{ menu.label }}
         </button>
       </router-link>
       <section class="user-menu-container">
-        <img v-if="isSignined" src="@/assets/profile.jpeg" @click="openMyMenu"/>
+        <img src="@/assets/profile.jpeg" @click="openMyMenu"/>
         <UserContextMenu :visible="application.myMenu.visible" @close="closeMyMenu"/>
-        <button v-if="!isSignined" @click="signup">등록</button>
-        <button v-if="!isSignined" @click="signin">로그인</button>
       </section>
     </nav>
 </template>
@@ -43,12 +39,6 @@ export default {
           visible: false
         }
       }
-    }
-  },
-  computed: {
-    isSignined: function () {
-      if (!this.user) return false
-      return this.user.id !== undefined && this.user.id !== ''
     }
   },
   methods: {
@@ -83,6 +73,23 @@ nav {
   padding: 0px 10px;
   display: flex;
   user-select: none;
+
+  span[data-type=logo] {
+    color: var(--foreground-secondary-color);
+    font-family: 'Yeongdo-Rg';
+    font-size: 30px;
+    align-self: self-end;
+    user-select: none;
+    margin: 0 10px 0 0;
+    font-weight: bold;
+
+    &:hover {
+      cursor: pointer;
+    }
+    &:active {
+      color: var(--secondary-color);
+    }
+  }
 
   a {
     &.router-link-active {

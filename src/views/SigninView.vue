@@ -1,21 +1,39 @@
 <template>
   <main>
-    <!-- <section class="signin-logo">
-      <router-link class="logo" to="/">
-        <font-awesome-icon icon="fa-solid fa-fan"></font-awesome-icon>
-      </router-link>
-    </section> -->
-    <h1>일정관리서비스 로그인</h1>
-    <section class="signin-box">
-      <section class="label">이메일 주소</section>
-      <input type="email" v-model="user.email" />
-      <section class="label">비밀번호</section>
-      <input type="password" v-model="user.password" @keypress.enter="signin" />
-      <button class="signin-button" @click="signin">로그인</button>
-      <a href="/user/reset">비밀번호를 잊어버리셨나요?</a>
-    </section>
-    <section class="signup-box">
-      <a href="/signup">새로운 계정</a><span>을 만들고 싶으신가요?</span>
+    <section class="container">
+      <section class="signin-form">
+        <h2>WORKUS</h2>
+        <input
+          ref="inputEmail"
+          type="email"
+          placeholder="이메일 주소"
+          v-model="form.email"
+        />
+        <input
+          ref="inputPassword"
+          type="password"
+          placeholder="비밀번호"
+          v-model="form.password"
+          @keyup.enter="signin"
+        />
+        <button @click="signin">로그인</button>
+      </section>
+      <section class="helpdesk">
+        <ul>
+          <li>
+            <font-awesome-icon
+              icon="fa-solid fa-caret-right"
+            ></font-awesome-icon>
+            <button @click="go('signup')">사용자 등록</button>
+          </li>
+          <li>
+            <font-awesome-icon
+              icon="fa-solid fa-caret-right"
+            ></font-awesome-icon>
+            <button>비밀번호 초기화</button>
+          </li>
+        </ul>
+      </section>
     </section>
   </main>
 </template>
@@ -24,17 +42,39 @@
 export default {
   data: () => {
     return {
-      user: {
+      form: {
         email: '',
         password: ''
       }
     }
   },
   methods: {
-    signin: function () {
+    validate: function () {
+      const view = this
+      if (this.form.email.length < 1) {
+        this.$alert({
+          contents: '이메일 주소를 입력해주세요',
+          callback: () => {
+            view.$refs.inputEmail.focus()
+          }
+        })
+        return false
+      }
+      if (this.form.password.length < 1) {
+        this.$alert({
+          contents: '비밀번호를 입력해주세요',
+          callback: () => {
+            view.$refs.inputPassword.focus()
+          }
+        })
+        return false
+      }
+    },
+    signin: function (e) {
+      if (this.validate() === false) return false
       this.$api
-        .post('api/signin', JSON.stringify(this.user))
-        .then((response) => {
+        .post('/api/signin', JSON.stringify(this.form))
+        .then(response => {
           sessionStorage.setItem('user', JSON.stringify({
             id: response.data.id,
             email: response.data.email,
@@ -44,97 +84,120 @@ export default {
           }))
           this.$router.replace('/explore')
         })
-        .catch((err) => {
-          console.error(err)
+        .catch(err => {
+          this.$alert({
+            title: '로그인 실패 (' + err.code + ')',
+            contents: err.message
+          })
         })
+    },
+    open: function () {
+      this.$alert({
+        title: 'TEST',
+        contents: 'TEST'
+      })
+    },
+    go: function (uri) {
+      this.$router.replace('/' + uri)
+    }
+  },
+  beforeCreate: function () {
+    const user = sessionStorage.getItem('user')
+    if (user !== null && user !== '') {
+      this.$router.replace('/explore')
     }
   }
 }
 </script>
 
-<style scoped lang="scss">
+<style lang="scss" scoped>
 main {
+  width: 100vw;
+  height: 100vh;
   display: flex;
   flex-direction: column;
-  text-align: center;
-  // justify-content: center;
-  height: 100vh;
+  justify-content: center;
 
-  h1 {
-    color: var(--primary-color);
-    padding: 30px 0 20px 0;
-  }
-
-  section.signin-logo {
-    width: 380px;
+  section.container {
+    width: 600px;
+    height: 350px;
+    display: flex;
+    flex-direction: row;
     align-self: center;
-    padding: 30px 0 20px 0;
+    border: 1px solid #e9e9e9;
+    box-shadow: 10px 10px 20px rgb(0 0 0 / 20%);
+    -webkit-box-shadow: 10px 10px 20px rgb(0 0 0 / 20%);
+    -moz-box-shadow: 10px 10px 20px rgba(000, 000, 000, 0.2);
+    -o-box-shadow: 10px 10px 20px rgba(000, 000, 000, 0.2);
+    -ms-box-shadow: 10px 10px 20px rgba(000, 000, 000, 0.2);
 
-    a.logo {
-      font-size: 80px;
-      text-align: center;
-      color: var(--primary-color);
-      &:active {
-        color: var(--secondary-color);
+    section.signin-form {
+      flex: 1;
+      padding: 30px;
+      h2 {
+        color: var(--primary-color);
+        font-family: 'Yeongdo-Rg';
+        font-size: 48px;
+        margin: 15px 0 0 0;
+        user-select: none;
+      }
+      input {
+        display: block;
+        background-color: transparent;
+        border: 0;
+        border-bottom: 1px solid var(--foreground-color);
+        padding: 15px 10px;
+        margin-top: 10px;
+        width: 300px;
+        outline: 0;
+      }
+      button {
+        background-color: var(--primary-color);
+        color: white;
+        outline: none;
+        border: 0;
+        font-size: 18px;
+        width: 320px;
+        padding: 15px 10px;
+        margin: 0;
+        margin-top: 40px;
+        user-select: none;
+        &:hover {
+          cursor: pointer;
+        }
+        &:active {
+          background-color: var(--secondary-color);
+        }
       }
     }
-  }
-  section.signin-box {
-    width: 380px;
-    border: 1px solid var(--foreground-color);
-    border-radius: 10px;
-    background-color: white;
-    align-self: center;
-    text-align: center;
-    padding: 40px 10px 20px 10px;
-    user-select: none;
-
-    section.label {
-      font-size: 16px;
-      text-align: left;
-      padding: 10px 30px;
-    }
-    input {
-      display: block;
-      margin: 0px 30px;
-      height: 25px;
-      padding: 10px;
-      outline: none;
-      width: 298px;
-      border: 1px solid var(--foreground-color);
-      border-radius: 5px;
-    }
-    button.signin-button {
-      display: block;
-      width: 320px;
-      font-size: 18px;
-      border: 0;
-      border-radius: 5px;
-      margin: 20px 30px;
-      padding: 15px 10px;
+    section.helpdesk {
+      width: 200px;
       background-color: var(--primary-color);
-      color: white;
-      &:hover {
-        cursor: pointer;
+      padding: 20px;
+      user-select: none;
+
+      ul {
+        margin: 0;
+        padding: 0;
+        list-style-type: none;
+        li {
+          margin-bottom: 10px;
+          svg {
+            margin: 0 10px 0 0;
+            color: var(--background-color);
+          }
+          button {
+            border: 0;
+            font-weight: 200;
+            color: var(--background-color);
+            background-color: transparent;
+            &:hover {
+              cursor: pointer;
+              text-decoration: underline;
+            }
+          }
+        }
       }
-      &:active {
-        background-color: var(--secondary-color);
-      }
-    }
-    a {
-      text-decoration: none;
-      font-size: 14px;
-      color: var(--font-link-color);
-      &:hover {
-        text-decoration: underline;
-      }
-    }
-  }
-  section.signup-box {
-    padding: 10px;
-    font-size: 14px;
-    a {
-      padding: 5px 0px;
     }
   }
 }

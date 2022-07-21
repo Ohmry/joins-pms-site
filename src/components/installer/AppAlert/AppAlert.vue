@@ -61,6 +61,15 @@ main {
     background-color: var(--background-color);
     align-self: center;
     padding: 20px 25px;
+    border: 1px solid #e9e9e9;
+    border-radius: 5px;
+    box-shadow: 10px 10px 20px rgb(0 0 0 / 20%);
+    -webkit-box-shadow: 10px 10px 20px rgb(0 0 0 / 20%);
+    -moz-box-shadow: 10px 10px 20px rgba(000, 000, 000, 0.2);
+    -o-box-shadow: 10px 10px 20px rgba(000, 000, 000, 0.2);
+    -ms-box-shadow: 10px 10px 20px rgba(000, 000, 000, 0.2);
+    user-select: none;
+
     h3 {
       font-weight: normal;
       margin: 10px 0 0 0;
@@ -74,6 +83,7 @@ main {
       width: 100px;
       height: 40px;
       border: 0;
+      border-radius: 5px;
       background-color: var(--primary-color);
       color: white;
       cursor: pointer;

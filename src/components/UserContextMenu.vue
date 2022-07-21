@@ -21,13 +21,25 @@ export default {
       return this.visible
     }
   },
+  watch: {
+    visible: function (visible) {
+      const view = this
+      if (visible) {
+        setTimeout(() => {
+          document.addEventListener('click', view.clickOutside)
+        }, 250)
+      } else {
+        document.removeEventListener('click', view.clickOutside)
+      }
+    }
+  },
   methods: {
     signout: function (e) {
       this.$emit('close')
       this.$confirm({
         title: '로그아웃',
         contents: '로그아웃 하시겠습니까?',
-        callback: (result) => {
+        callback: result => {
           if (result) {
             this.user = {}
             sessionStorage.removeItem('user')
@@ -35,6 +47,19 @@ export default {
           }
         }
       })
+    },
+    clickOutside: function (e) {
+      const pointX = e.x
+      const pointY = e.y
+      const inside =
+        pointX >= this.$el.offsetLeft &&
+        pointX <= this.$el.offsetLeft + this.$el.clientWidth &&
+        pointY >= this.$el.offsetTop &&
+        pointY <= this.$el.offsetTop + this.$el.clientHeight
+
+      if (!inside) {
+        this.$emit('close')
+      }
     }
   }
 }

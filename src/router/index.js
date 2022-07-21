@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import IntroView from '../views/IntroView.vue'
 import ExploreView from '@/views/ExploreView.vue'
 import GroupView from '@/views/GroupView.vue'
 import ProjectView from '@/views/ProjectView.vue'
@@ -12,8 +11,8 @@ Vue.use(VueRouter)
 const routes = [
   {
     path: '/',
-    name: 'intro',
-    component: IntroView
+    name: 'signin',
+    component: SigninView
   },
   {
     path: '/explore',
@@ -34,11 +33,6 @@ const routes = [
     path: '/signup',
     name: 'signup',
     component: SignupView
-  },
-  {
-    path: '/signin',
-    name: 'signin',
-    component: SigninView
   }
 ]
 

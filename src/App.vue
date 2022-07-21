@@ -30,6 +30,7 @@ export default {
   --background-color: #f7f7f7;
   --background-secondary-color: #e7e7e7;
   --foreground-color: #adadad;
+  --foreground-secondary-color: #E7E7E7;
   --primary-color: #d7102d;
   --secondary-color: #f25a71;
   --font-link-color: #0427d4;
