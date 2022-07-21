@@ -8,8 +8,10 @@
         </button>
       </router-link>
       <section class="user-menu-container">
+        <font-awesome-icon icon="fa-solid fa-bell" data-type="alarm"></font-awesome-icon>
+        <span v-if="application.alarm.visible" data-type="badge"></span>
         <img src="@/assets/profile.jpeg" @click="openMyMenu"/>
-        <UserContextMenu :visible="application.myMenu.visible" @close="closeMyMenu"/>
+        <UserContextMenu :visible="application.myMenu.visible" :user="user" @close="closeMyMenu"/>
       </section>
     </nav>
 </template>
@@ -37,6 +39,9 @@ export default {
         ],
         myMenu: {
           visible: false
+        },
+        alarm: {
+          visible: false
         }
       }
     }
@@ -63,9 +68,9 @@ export default {
 
 <style lang="scss" scoped>
 span.divider {
-  border-right: 1px solid #b5b5b5;
+  border-right: 1px solid #FF526B;
   padding: 8px 5px;
-  margin: 5px 10px 5px 0px;
+  margin: 8px 10px 8px 0px;
 }
 nav {
   background-color: var(--primary-color);
@@ -100,16 +105,41 @@ nav {
   }
 
   section.user-menu-container {
-    margin: 0 0 0 auto;
-  }
+    margin: 0 10px 0 auto;
+    display: flex;
+    flex-direction: row;
 
-  img {
-    border-radius: 50%;
-    width: 40px;
-    height: 40px;
-    border: 1px solid var(--background-color);
-    margin: 3px 0 3px auto;
-    cursor: pointer;
+    svg[data-type=alarm] {
+      font-size: 20px;
+      align-self: center;
+      margin: 0 20px 0 0;
+      color: var(--background-color);
+
+      &:hover {
+        cursor: pointer;
+        color: var(--background-secondary-color);
+      }
+    }
+
+    span[data-type=badge] {
+      position: absolute;
+      top: 15px;
+      right: 70px;
+      border: 1px solid var(--primary-color);
+      background-color: #CFEF4D;
+      border-radius: 50%;
+      width: 8px;
+      height: 8px;
+    }
+
+    img {
+      border-radius: 50%;
+      width: 30px;
+      height: 30px;
+      border: 1px solid var(--background-color);
+      margin: 9px 0 9px auto;
+      cursor: pointer;
+    }
   }
 }
 button {

@@ -75,12 +75,13 @@ export default {
       this.$api
         .post('/api/signin', JSON.stringify(this.form))
         .then(response => {
+          console.log(response)
           sessionStorage.setItem('user', JSON.stringify({
             id: response.data.id,
             email: response.data.email,
             name: response.data.name,
-            accessToken: response.data.accessToken,
-            refreshToken: response.data.refreshToken
+            accessToken: response.data.token.accessToken,
+            refreshToken: response.data.token.refreshToken
           }))
           this.$router.replace('/explore')
         })

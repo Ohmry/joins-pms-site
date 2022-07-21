@@ -130,6 +130,7 @@ section.explore-view-container {
     button.btn-more {
       margin: 15px 0 0 0;
       border: 0;
+      font-size: 14px;
       color: #6E6E6E;
       background-color: transparent !important;
       &:hover {

@@ -86,7 +86,7 @@ export default {
             title: '사용자 등록 완료',
             contents:
               '사용자 등록이 완료되었습니다. 로그인 화면으로 이동합니다.',
-            callback: () => this.$router.replace('/signin')
+            callback: () => this.$router.replace('/')
           })
         })
         .catch(err => {
@@ -124,6 +124,7 @@ main {
     flex-direction: column;
     align-self: center;
     border: 1px solid #e9e9e9;
+    border-radius: 10px;
     box-shadow: 10px 10px 20px rgb(0 0 0 / 20%);
     -webkit-box-shadow: 10px 10px 20px rgb(0 0 0 / 20%);
     -moz-box-shadow: 10px 10px 20px rgba(000, 000, 000, 0.2);
@@ -138,6 +139,8 @@ main {
       margin: 0 0 20px 0;
       user-select: none;
       padding: 30px 20px 0 20px;
+      border-top-left-radius: 5px;
+      border-top-right-radius: 5px;
     }
 
     article {

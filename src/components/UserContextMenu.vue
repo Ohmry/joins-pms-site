@@ -1,8 +1,8 @@
 <template>
   <main v-if="isVisible">
     <article>
-      <span data-type="name">이병훈</span>
-      <span data-type="email">o.ohmry@gmail.com</span>
+      <span data-type="name">{{ user.name }}</span>
+      <span data-type="email">{{ user.email }}</span>
     </article>
     <div class="divider"></div>
     <button>내 정보</button>
@@ -15,7 +15,7 @@
 
 <script>
 export default {
-  props: ['visible'],
+  props: ['visible', 'user'],
   computed: {
     isVisible: function () {
       return this.visible
@@ -41,7 +41,6 @@ export default {
         contents: '로그아웃 하시겠습니까?',
         callback: result => {
           if (result) {
-            this.user = {}
             sessionStorage.removeItem('user')
             this.$router.replace('/')
           }
@@ -106,6 +105,7 @@ main {
     background-color: transparent;
     padding: 10px 15px;
     text-align: left;
+    font-size: 14px;
     &:hover {
       background-color: var(--primary-color);
       color: white;
