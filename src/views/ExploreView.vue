@@ -24,6 +24,9 @@
             <span>{{ group.name }}</span>
           </li>
         </ul>
+        <article>
+          Copyright
+        </article>
       </section>
       <section class="explore-activity-container">
         Activity

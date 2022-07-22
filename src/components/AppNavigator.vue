@@ -1,6 +1,6 @@
 <template>
   <nav>
-      <span data-type="logo">WORKUS</span>
+      <a href="/explore" data-type="logo">WORKUS</a>
       <span class="divider"></span>
       <router-link v-for="(menu, index) in application.menus" :key="index" :to="menu.uri">
         <button>
@@ -67,11 +67,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-span.divider {
-  border-right: 1px solid #FF526B;
-  padding: 8px 5px;
-  margin: 8px 10px 8px 0px;
-}
 nav {
   background-color: var(--primary-color);
   height: 50px;
@@ -79,7 +74,13 @@ nav {
   display: flex;
   user-select: none;
 
-  span[data-type=logo] {
+  span.divider {
+    border-right: 1px solid #FF526B;
+    padding: 8px 5px;
+    margin: 8px 10px 8px 0px;
+  }
+
+  a[data-type=logo] {
     color: var(--foreground-secondary-color);
     font-family: 'Yeongdo-Rg';
     font-size: 30px;
@@ -87,6 +88,7 @@ nav {
     user-select: none;
     margin: 0 10px 0 0;
     font-weight: bold;
+    text-decoration: none;
 
     &:hover {
       cursor: pointer;
@@ -99,6 +101,19 @@ nav {
   a {
     &.router-link-active {
       button {
+        color: var(--button-active-color);
+      }
+    }
+
+    button {
+      height: 100%;
+      border: 0px;
+      background-color: transparent;
+      font-size: 16px;
+      color: var(--button-not-active-color);
+      cursor: pointer;
+      padding: 0 15px;
+      &:active {
         color: var(--button-active-color);
       }
     }
@@ -142,68 +157,5 @@ nav {
     }
   }
 }
-button {
-  height: 100%;
-  border: 0px;
-  background-color: transparent;
-  font-size: 16px;
-  color: var(--button-not-active-color);
-  cursor: pointer;
-  padding: 0 15px;
-  &:active {
-    color: var(--button-active-color);
-  }
-}
-a.app-logo {
-  font-size: 25px;
-  padding: 10px 5px;
-  color: white;
 
-  svg:hover {
-    animation: spinLogo 1.5s infinite;
-    animation-timing-function: linear;
-  }
-}
-@keyframes spinLogo {
-  from {
-    -webkit-transform: rotate(0deg);
-    -o-transform: rotate(0deg);
-    transform: rotate(0deg);
-    opacity: 0.7;
-  }
-  13% {
-    color: red;
-    opacity: 0.7;
-  }
-  26% {
-    color: orange;
-    opacity: 0.7;
-  }
-  39% {
-    color: yellow;
-    opacity: 0.7;
-  }
-  52% {
-    color: green;
-    opacity: 0.7;
-  }
-  65% {
-    color: blue;
-    opacity: 0.7;
-  }
-  78% {
-    color: indigo;
-    opacity: 0.7;
-  }
-  91% {
-    color: purple;
-    opacity: 0.7;
-  }
-  to {
-    -webkit-transform: rotate(360deg);
-    -o-transform: rotate(360deg);
-    transform: rotate(360deg);
-    opacity: 0.7;
-  }
-}
 </style>

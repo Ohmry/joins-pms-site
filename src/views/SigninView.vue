@@ -1,131 +1,110 @@
 <template>
-  <main>
-    <section class="container">
+  <section class="container">
+    <header>
+      <h1>WORKUS</h1>
+    </header>
+    <main>
       <section class="signin-form">
-        <h2>WORKUS</h2>
-        <input
-          ref="inputEmail"
-          type="email"
-          placeholder="이메일 주소"
-          v-model="form.email"
-        />
-        <input
-          ref="inputPassword"
-          type="password"
-          placeholder="비밀번호"
-          v-model="form.password"
-          @keyup.enter="signin"
-        />
-        <button @click="signin">로그인</button>
+        <div class="slide-wrap">
+          <ul>
+            <li :class="{ 'activate-form': isStandard }">
+              <button @click="changeToStandard">일반 사용자</button>
+            </li>
+            <li :class="{ 'activate-form': isLdap }">
+              <button @click="changeToLdap">그룹웨어 사용자</button>
+            </li>
+          </ul>
+          <div :style="form.selector.style"></div>
+        </div>
+        <transition name="slide-fade">
+          <article v-if="isStandard" class="standard-signin">
+            <input type="email" placeholder="이메일 주소" />
+            <input type="password" placeholder="비밀번호" />
+          </article>
+        </transition>
+        <transition name="slide-fade">
+          <article v-if="isLdap" class="ldap-signin">
+            <input type="email" placeholder="그룹웨어 계정" />
+            <input type="password" placeholder="비밀번호" />
+          </article>
+        </transition>
+        <button class="btn-signin">로그인</button>
+        <a class="link-signup" href="/signup">계정이 없으신가요?</a>
       </section>
-      <section class="helpdesk">
-        <ul>
-          <li>
-            <font-awesome-icon
-              icon="fa-solid fa-caret-right"
-            ></font-awesome-icon>
-            <button @click="go('signup')">사용자 등록</button>
-          </li>
-          <li>
-            <font-awesome-icon
-              icon="fa-solid fa-caret-right"
-            ></font-awesome-icon>
-            <button>비밀번호 초기화</button>
-          </li>
-        </ul>
-      </section>
-    </section>
-  </main>
+    </main>
+  </section>
 </template>
 
 <script>
 export default {
+  name: 'SigninView',
   data: () => {
     return {
+      signin: {
+        type: 'standard'
+      },
       form: {
-        email: '',
-        password: ''
+        selector: {
+          style: {
+            width: '200px',
+            height: '50px',
+            // 'background-color': 'var(--primary-color)',
+            'background-color': 'var(--background-color)',
+            transition: '0.5s',
+            'margin-left': '0px',
+            position: 'absolute',
+            'z-index': 0
+          }
+        }
       }
+    }
+  },
+  computed: {
+    isStandard: function () {
+      return this.signin.type === 'standard'
+    },
+    isLdap: function () {
+      return this.signin.type === 'ldap'
     }
   },
   methods: {
-    validate: function () {
-      const view = this
-      if (this.form.email.length < 1) {
-        this.$alert({
-          contents: '이메일 주소를 입력해주세요',
-          callback: () => {
-            view.$refs.inputEmail.focus()
-          }
-        })
-        return false
-      }
-      if (this.form.password.length < 1) {
-        this.$alert({
-          contents: '비밀번호를 입력해주세요',
-          callback: () => {
-            view.$refs.inputPassword.focus()
-          }
-        })
-        return false
-      }
+    changeToStandard: function (e) {
+      this.form.selector.style['margin-left'] = '0px'
+      this.signin.type = 'standard'
     },
-    signin: function (e) {
-      if (this.validate() === false) return false
-      this.$api
-        .post('/api/signin', JSON.stringify(this.form))
-        .then(response => {
-          console.log(response)
-          sessionStorage.setItem('user', JSON.stringify({
-            id: response.data.id,
-            email: response.data.email,
-            name: response.data.name,
-            accessToken: response.data.token.accessToken,
-            refreshToken: response.data.token.refreshToken
-          }))
-          this.$router.replace('/explore')
-        })
-        .catch(err => {
-          this.$alert({
-            title: '로그인 실패 (' + err.code + ')',
-            contents: err.message
-          })
-        })
-    },
-    open: function () {
-      this.$alert({
-        title: 'TEST',
-        contents: 'TEST'
-      })
-    },
-    go: function (uri) {
-      this.$router.replace('/' + uri)
-    }
-  },
-  beforeCreate: function () {
-    const user = sessionStorage.getItem('user')
-    if (user !== null && user !== '') {
-      this.$router.replace('/explore')
+    changeToLdap: function (e) {
+      this.form.selector.style['margin-left'] = '200px'
+      this.signin.type = 'ldap'
     }
   }
 }
 </script>
 
 <style lang="scss" scoped>
-main {
-  width: 100vw;
-  height: 100vh;
+section.container {
   display: flex;
   flex-direction: column;
+  width: 100vw;
+  height: 100vh;
   justify-content: center;
 
-  section.container {
-    width: 600px;
-    height: 350px;
-    display: flex;
-    flex-direction: row;
+  header {
+    text-align: center;
+    user-select: none;
+    h1 {
+      color: var(--primary-color);
+      font-family: 'Yeongdo-Rg';
+      font-size: 52px;
+      margin: 0;
+    }
+  }
+
+  main {
+    height: 330px;
     align-self: center;
-    border: 1px solid #e9e9e9;
+    border: 1px solid #CDCDCD;
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
     box-shadow: 10px 10px 20px rgb(0 0 0 / 20%);
     -webkit-box-shadow: 10px 10px 20px rgb(0 0 0 / 20%);
     -moz-box-shadow: 10px 10px 20px rgba(000, 000, 000, 0.2);
@@ -133,36 +112,56 @@ main {
     -ms-box-shadow: 10px 10px 20px rgba(000, 000, 000, 0.2);
 
     section.signin-form {
-      flex: 1;
-      padding: 30px;
-      h2 {
-        color: var(--primary-color);
-        font-family: 'Yeongdo-Rg';
-        font-size: 48px;
-        margin: 15px 0 0 0;
-        user-select: none;
+      width: 400px;
+      div.slide-wrap {
+        width: 400px;
+        height: 50px;
+        background-color: var(--primary-color);
+        ul {
+          list-style-type: none;
+          margin: 0;
+          padding: 0;
+          display: flex;
+          flex-direction: row;
+          position: absolute;
+          z-index: 1;
+          user-select: none;
+          background-color: transparent;
+          li {
+            width: 200px;
+            height: 50px;
+            text-align: center;
+            background-color: transparent;
+            &.activate-form {
+              button {
+                color: var(--primary-color);
+              }
+            }
+            button {
+              border: 0;
+              width: 200px;
+              height: 50px;
+              background-color: transparent;
+              color: white;
+              &:hover {
+                cursor: pointer;
+              }
+            }
+          }
+        }
       }
-      input {
-        display: block;
-        background-color: transparent;
+      button.btn-signin {
+        position: absolute;
+        margin: 170px 30px 0 30px;
+        height: 50px;
+        width: 340px;
         border: 0;
-        border-bottom: 1px solid var(--foreground-color);
-        padding: 15px 10px;
-        margin-top: 10px;
-        width: 300px;
+        border-radius: 5px;
         outline: 0;
-      }
-      button {
         background-color: var(--primary-color);
         color: white;
-        outline: none;
-        border: 0;
-        font-size: 18px;
-        width: 320px;
-        padding: 15px 10px;
-        margin: 0;
-        margin-top: 40px;
         user-select: none;
+
         &:hover {
           cursor: pointer;
         }
@@ -170,36 +169,49 @@ main {
           background-color: var(--secondary-color);
         }
       }
-    }
-    section.helpdesk {
-      width: 200px;
-      background-color: var(--primary-color);
-      padding: 20px;
-      user-select: none;
-
-      ul {
-        margin: 0;
-        padding: 0;
-        list-style-type: none;
-        li {
-          margin-bottom: 10px;
-          svg {
-            margin: 0 10px 0 0;
-            color: var(--background-color);
-          }
-          button {
-            border: 0;
-            font-weight: 200;
-            color: var(--background-color);
-            background-color: transparent;
-            &:hover {
-              cursor: pointer;
-              text-decoration: underline;
-            }
-          }
-        }
+      a.link-signup {
+        position: absolute;
+        margin: 230px 0 0 35px;
+        font-size: 16px;
       }
     }
+
+    article.standard-signin,
+    article.ldap-signin {
+      position: absolute;
+      width: 340px;
+      padding: 20px 30px 10px 30px;
+
+      input {
+        border: 0;
+        width: 320px;
+        background-color: transparent;
+        display: block;
+        font-size: 16px;
+        border-bottom: 1px solid #6B6B6B;
+        padding: 10px;
+        margin-top: 20px;
+        outline: 0;
+        user-select: none;
+      }
+    }
+  }
+
+  .slide-fade-enter,
+  .slide-fade-leave {
+    transition: all .1s ease;
+  }
+  .slide-fade-leave-active,
+  .slide-fade-enter-active {
+    transition: all .1s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+  }
+  .slide-fade-enter,
+  .slide-fade-leave-to {
+    opacity: 0;
+  }
+  .slide-fade-leave,
+  .slide-fade-enter-to {
+    opacity: 1;
   }
 }
 </style>

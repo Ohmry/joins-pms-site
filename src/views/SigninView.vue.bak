@@ -1,0 +1,205 @@
+// <template>
+//   <main>
+//     <section class="container">
+//       <section class="signin-form">
+//         <h2>WORKUS</h2>
+//         <input
+//           ref="inputEmail"
+//           type="email"
+//           placeholder="이메일 주소"
+//           v-model="form.email"
+//         />
+//         <input
+//           ref="inputPassword"
+//           type="password"
+//           placeholder="비밀번호"
+//           v-model="form.password"
+//           @keyup.enter="signin"
+//         />
+//         <button @click="signin">로그인</button>
+//       </section>
+//       <section class="helpdesk">
+//         <ul>
+//           <li>
+//             <font-awesome-icon
+//               icon="fa-solid fa-caret-right"
+//             ></font-awesome-icon>
+//             <button @click="go('signup')">사용자 등록</button>
+//           </li>
+//           <li>
+//             <font-awesome-icon
+//               icon="fa-solid fa-caret-right"
+//             ></font-awesome-icon>
+//             <button>비밀번호 초기화</button>
+//           </li>
+//         </ul>
+//       </section>
+//     </section>
+//   </main>
+// </template>
+
+// <script>
+// export default {
+//   data: () => {
+//     return {
+//       form: {
+//         email: '',
+//         password: ''
+//       }
+//     }
+//   },
+//   methods: {
+//     validate: function () {
+//       const view = this
+//       if (this.form.email.length < 1) {
+//         this.$alert({
+//           contents: '이메일 주소를 입력해주세요',
+//           callback: () => {
+//             view.$refs.inputEmail.focus()
+//           }
+//         })
+//         return false
+//       }
+//       if (this.form.password.length < 1) {
+//         this.$alert({
+//           contents: '비밀번호를 입력해주세요',
+//           callback: () => {
+//             view.$refs.inputPassword.focus()
+//           }
+//         })
+//         return false
+//       }
+//     },
+//     signin: function (e) {
+//       if (this.validate() === false) return false
+//       this.$api
+//         .post('/api/signin', JSON.stringify(this.form))
+//         .then(response => {
+//           console.log(response)
+//           sessionStorage.setItem('user', JSON.stringify({
+//             id: response.data.id,
+//             email: response.data.email,
+//             name: response.data.name,
+//             accessToken: response.data.token.accessToken,
+//             refreshToken: response.data.token.refreshToken
+//           }))
+//           this.$router.replace('/explore')
+//         })
+//         .catch(err => {
+//           this.$alert({
+//             title: '로그인 실패 (' + err.code + ')',
+//             contents: err.message
+//           })
+//         })
+//     },
+//     open: function () {
+//       this.$alert({
+//         title: 'TEST',
+//         contents: 'TEST'
+//       })
+//     },
+//     go: function (uri) {
+//       this.$router.replace('/' + uri)
+//     }
+//   },
+//   beforeCreate: function () {
+//     const user = sessionStorage.getItem('user')
+//     if (user !== null && user !== '') {
+//       this.$router.replace('/explore')
+//     }
+//   }
+// }
+// </script>
+
+// <style lang="scss" scoped>
+// main {
+//   width: 100vw;
+//   height: 100vh;
+//   display: flex;
+//   flex-direction: column;
+//   justify-content: center;
+
+//   section.container {
+//     width: 600px;
+//     height: 350px;
+//     display: flex;
+//     flex-direction: row;
+//     align-self: center;
+//     border: 1px solid #e9e9e9;
+//     box-shadow: 10px 10px 20px rgb(0 0 0 / 20%);
+//     -webkit-box-shadow: 10px 10px 20px rgb(0 0 0 / 20%);
+//     -moz-box-shadow: 10px 10px 20px rgba(000, 000, 000, 0.2);
+//     -o-box-shadow: 10px 10px 20px rgba(000, 000, 000, 0.2);
+//     -ms-box-shadow: 10px 10px 20px rgba(000, 000, 000, 0.2);
+
+//     section.signin-form {
+//       flex: 1;
+//       padding: 30px;
+//       h2 {
+//         color: var(--primary-color);
+//         font-family: 'Yeongdo-Rg';
+//         font-size: 48px;
+//         margin: 15px 0 0 0;
+//         user-select: none;
+//       }
+//       input {
+//         display: block;
+//         background-color: transparent;
+//         border: 0;
+//         border-bottom: 1px solid var(--foreground-color);
+//         padding: 15px 10px;
+//         margin-top: 10px;
+//         width: 300px;
+//         outline: 0;
+//       }
+//       button {
+//         background-color: var(--primary-color);
+//         color: white;
+//         outline: none;
+//         border: 0;
+//         font-size: 18px;
+//         width: 320px;
+//         padding: 15px 10px;
+//         margin: 0;
+//         margin-top: 40px;
+//         user-select: none;
+//         &:hover {
+//           cursor: pointer;
+//         }
+//         &:active {
+//           background-color: var(--secondary-color);
+//         }
+//       }
+//     }
+//     section.helpdesk {
+//       width: 200px;
+//       background-color: var(--primary-color);
+//       padding: 20px;
+//       user-select: none;
+
+//       ul {
+//         margin: 0;
+//         padding: 0;
+//         list-style-type: none;
+//         li {
+//           margin-bottom: 10px;
+//           svg {
+//             margin: 0 10px 0 0;
+//             color: var(--background-color);
+//           }
+//           button {
+//             border: 0;
+//             font-weight: 200;
+//             color: var(--background-color);
+//             background-color: transparent;
+//             &:hover {
+//               cursor: pointer;
+//               text-decoration: underline;
+//             }
+//           }
+//         }
+//       }
+//     }
+//   }
+// }
+// </style>
