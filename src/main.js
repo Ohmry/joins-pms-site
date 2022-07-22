@@ -19,7 +19,8 @@ import {
   faUserTie,
   faBuilding,
   faCaretRight,
-  faBell
+  faBell,
+  faBoxOpen
 } from '@fortawesome/free-solid-svg-icons'
 
 library.add(
@@ -31,7 +32,8 @@ library.add(
   faUserTie,
   faBuilding,
   faCaretRight,
-  faBell
+  faBell,
+  faBoxOpen
 )
 
 Vue.component('font-awesome-icon', FontAwesomeIcon)

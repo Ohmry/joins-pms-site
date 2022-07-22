@@ -101,12 +101,6 @@ export default {
     go: function (uri) {
       this.$router.replace('/' + uri)
     }
-  },
-  beforeCreate: function () {
-    const user = sessionStorage.getItem('user')
-    if (user !== null && user !== '') {
-      this.$router.replace('/explore')
-    }
   }
 }
 </script>

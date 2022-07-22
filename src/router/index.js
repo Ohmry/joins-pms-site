@@ -42,4 +42,29 @@ const router = new VueRouter({
   routes
 })
 
+router.beforeEach(function (to, from, next) {
+  const userInfo = JSON.parse(sessionStorage.getItem('user'))
+  if (to.path === '/') {
+    if (userInfo !== null && userInfo.accessToken.length > 0) {
+      next({
+        path: '/explore',
+        replace: true
+      })
+    } else {
+      next()
+    }
+  } else if (to.path === '/signup') {
+    next()
+  } else {
+    if (userInfo === null || userInfo.accessToken.length < 1) {
+      next({
+        path: '/',
+        replace: true
+      })
+    } else {
+      next()
+    }
+  }
+})
+
 export default router
