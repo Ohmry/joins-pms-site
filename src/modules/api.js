@@ -42,8 +42,15 @@ export default {
           resolve(data)
         })
         .catch((error) => {
-          const data = error.response.data
-          data.status = error.response.status
+          let data = {}
+          if (error.code === 'ERR_NETWORK') {
+            data.code = error.code
+            data.status = 0
+            data.message = '통신 오류'
+          } else {
+            data = error.response.data
+            data.status = error.response.status
+          }
           reject(data)
         })
     })

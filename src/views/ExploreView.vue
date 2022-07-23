@@ -6,7 +6,7 @@
         <aside>
           <article>
             <span>최근 열람한 프로젝트</span>
-            <button>새 프로젝트</button>
+            <button @click="goToProjectCreate">새 프로젝트</button>
           </article>
           <span data-type="caption">프로젝트가 존재하지 않습니다.</span>
           <ul>
@@ -18,7 +18,7 @@
           <div class="divider"></div>
           <article>
             <span>내가 속한 그룹</span>
-            <button>새 그룹</button>
+            <button @click="goToGroupCreate">새 그룹</button>
           </article>
           <span data-type="caption">내가 속해있는 그룹이 존재하지 않습니다.</span>
           <ul>
@@ -97,6 +97,12 @@ export default {
   methods: {
     open: function (e) {
       this.$contextmenu(e)
+    },
+    goToGroupCreate: function (e) {
+      this.$router.push('/group/create')
+    },
+    goToProjectCreate: function (e) {
+      this.$router.push('/project/create')
     }
   }
 }

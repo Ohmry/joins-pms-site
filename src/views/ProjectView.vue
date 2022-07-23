@@ -2,7 +2,7 @@
   <div class="view-wrap">
     <AppNavigator />
     <header>
-      <font-awesome-icon data-type="icon" icon="fa-solid fa-box-open"></font-awesome-icon>
+      <font-awesome-icon data-type="icon" icon="fa-solid fa-cube"></font-awesome-icon>
       <a data-type="group">메가박스</a>
       <span>/</span>
       <a data-type="project">페이즈 금액권 기능 개발</a>
@@ -43,8 +43,8 @@ header {
   padding: 0 15px;
 
   svg[data-type=icon] {
-    color: var(--primary-color);
-    font-size: 24px;
+    color: #6B6B6B;
+    font-size: 20px;
     margin: 0 10px 0 0;
   }
   a {

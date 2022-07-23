@@ -2,7 +2,9 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import ExploreView from '@/views/ExploreView.vue'
 import GroupView from '@/views/GroupView.vue'
+import GroupCreateView from '@/views/GroupCreateView.vue'
 import ProjectView from '@/views/ProjectView.vue'
+import ProjectCreateView from '@/views/ProjectCreateView.vue'
 import SignupView from '@/views/SignupView.vue'
 import SigninView from '@/views/SigninView.vue'
 
@@ -25,9 +27,19 @@ const routes = [
     component: GroupView
   },
   {
+    path: '/group/create',
+    name: 'groupCreate',
+    component: GroupCreateView
+  },
+  {
     path: '/project',
     name: 'project',
     component: ProjectView
+  },
+  {
+    path: '/project/create',
+    name: 'projectCreate',
+    component: ProjectCreateView
   },
   {
     path: '/signup',

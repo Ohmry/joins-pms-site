@@ -20,8 +20,13 @@ import {
   faBuilding,
   faCaretRight,
   faBell,
-  faBoxOpen
+  faCube
 } from '@fortawesome/free-solid-svg-icons'
+
+import {
+  faUser,
+  faKeyboard
+} from '@fortawesome/free-regular-svg-icons'
 
 library.add(
   faShapes,
@@ -33,7 +38,12 @@ library.add(
   faBuilding,
   faCaretRight,
   faBell,
-  faBoxOpen
+  faCube
+)
+
+library.add(
+  faUser,
+  faKeyboard
 )
 
 Vue.component('font-awesome-icon', FontAwesomeIcon)
